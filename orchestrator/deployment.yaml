@@ -1,0 +1,30 @@
+# This file configures the hello-world app which serves public web traffic.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orcehstrator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orcehstrator
+  template:
+    metadata:
+      labels:
+        app: orcehstrator
+    spec:
+      containers:
+      - name: orcehstrator-app
+        # Replace workflows-demo-314019 with your project ID
+        # gcloud builds submit --tag gcr.io/workflows-demo-314019/orcehstrator .
+        # gcloud container clusters create workflow-demo --num-nodes 2 --zone us-east1-b
+        # image: gcr.io/workflows-demo-314019/orcehstrator:latest
+        image: gcr.io/workflows-demo-314019/orcehstrator:orcehstrator@sha256:2a55a4735aca547b599fbaad1673a879f6fa3c37cbc71801c4eac3cd1405dafc        
+        #34.117.20.217/* docker pull gcr.io/workflows-demo-314019/
+        # This app listens on port 8080 for web traffic by default.
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        env:
+          - name: PORT
+            value: "8080"

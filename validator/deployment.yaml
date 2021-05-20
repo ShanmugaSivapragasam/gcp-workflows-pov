@@ -1,0 +1,30 @@
+# This file configures the hello-world app which serves public web traffic.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: validator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: validator
+  template:
+    metadata:
+      labels:
+        app: validator
+    spec:
+      containers:
+      - name: validator-app
+        # Replace workflows-demo-314019 with your project ID
+        # gcloud builds submit --tag gcr.io/workflows-demo-314019/validator .
+        # gcloud container clusters create workflow-demo --num-nodes 2 --zone us-east1-b
+        # image: gcr.io/workflows-demo-314019/validator:latest
+        image: gcr.io/workflows-demo-314019/validator:validator@sha256:2a55a4735aca547b599fbaad1673a879f6fa3c37cbc71801c4eac3cd1405dafc        
+        #34.117.20.217/* docker pull gcr.io/workflows-demo-314019/
+        # This app listens on port 8080 for web traffic by default.
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        env:
+          - name: PORT
+            value: "8080"

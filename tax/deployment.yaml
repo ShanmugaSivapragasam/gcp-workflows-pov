@@ -1,0 +1,28 @@
+# This file configures the hello-world app which serves public web traffic.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tax
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tax
+  template:
+    metadata:
+      labels:
+        app: tax
+    spec:
+      containers:
+      - name: tax-app
+        # Replace workflows-demo-314019 with your project ID
+        # gcloud builds submit --tag gcr.io/workflows-demo-314019/tax .
+        # gcloud container clusters create workflow-demo --num-nodes 2 --zone us-east1-b
+        image: gcr.io/workflows-demo-314019/tax:latest
+        # This app listens on port 8080 for web traffic by default.
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        env:
+          - name: PORT
+            value: "8080"

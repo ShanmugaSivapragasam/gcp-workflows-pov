@@ -1,0 +1,30 @@
+---
+apiVersion: "extensions/v1beta1"
+kind: "Ingress"
+metadata:
+  name: ""
+  namespace: "default"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: "/discounts"
+        backend:
+          serviceName: "discounts-service"
+          servicePort: 80
+      - path: "/loyalty"
+        backend:
+          serviceName: "loyalty-service"
+          servicePort: 80
+      - path: "/marketing"
+        backend:
+          serviceName: "marketing-service"
+          servicePort: 80
+      - path: "/payment"
+        backend:
+          serviceName: "payment-service"
+          servicePort: 80
+      - path: "/validator"
+        backend:
+          serviceName: "validator-service"
+          servicePort: 80
