@@ -18,8 +18,8 @@ spec:
         # Replace workflows-demo-314019 with your project ID
         # gcloud builds submit --tag gcr.io/workflows-demo-314019/validator .
         # gcloud container clusters create workflow-demo --num-nodes 2 --zone us-east1-b
-        # image: gcr.io/workflows-demo-314019/validator:latest
-        image: gcr.io/workflows-demo-314019/validator:validator@sha256:2a55a4735aca547b599fbaad1673a879f6fa3c37cbc71801c4eac3cd1405dafc        
+        image: gcr.io/workflows-demo-314019/validator:latest
+        # image: gcr.io/workflows-demo-314019/validator@sha256:509d993eea8ebd9d36e4f74f16aad7efead140a00b557b92c8e6b13a6236745f
         #34.117.20.217/* docker pull gcr.io/workflows-demo-314019/
         # This app listens on port 8080 for web traffic by default.
         ports:

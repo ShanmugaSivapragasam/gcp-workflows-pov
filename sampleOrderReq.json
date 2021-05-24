@@ -1,0 +1,15 @@
+{
+    "orderId":"",
+    "name": "Giga Robot",
+    "address": "Gigafactory, Austin, Texas",
+    "payments":[
+        {
+            "token": 546736892444,
+            "amount": 5.00           
+        },
+        {
+            "token": 246736792444,
+            "amount": 2.52          
+        }
+    ]
+}

@@ -18,7 +18,8 @@ spec:
         # Replace workflows-demo-314019 with your project ID
         # gcloud builds submit --tag gcr.io/workflows-demo-314019/loyalty .
         # gcloud container clusters create workflow-demo --num-nodes 2 --zone us-east1-b
-        image: gcr.io/workflows-demo-314019/loyalty:latest
+        # image: gcr.io/workflows-demo-314019/loyalty:latest
+        image: gcr.io/workflows-demo-314019/loyalty@sha256:d13a41d546dc4f35970022e8cca5d33892d7bfc4d450e4387e9053b1ce29b319
         # This app listens on port 8080 for web traffic by default.
         ports:
         - containerPort: 8080

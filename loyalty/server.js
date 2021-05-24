@@ -2,12 +2,14 @@ const express = require('express')
 const app = express()
 const port = 8080
 
+app.use(express.json())
+
 app.get('/', (req, res) => {
   res.send('root is NOT SUPPORTED!')
 })
 
 app.post('/loyalty', (req, res) => {
-    console.log('req received for loyalty')
+    console.log(req )
     setTimeout( () =>
         {
             res.send({
