@@ -61,7 +61,7 @@ app.post('/orders', async (req, res) =>  {
 
         //send the response with the marketing content
 
-        return res.json(markLoyalRes)
+        return res.json(markLoyalRes[1])
 
     }
    
@@ -83,16 +83,13 @@ async function postData(request, url) {
         // let response = null
         return response.data
 }
-function postDataHelper(request, url){
-    return axios.post(request, url)
-}
  async function postDataInParallel(data) {
     let promises = []
     data.forEach(datum => {
         console.log(`datum....`)
         console.log(datum.url)
         console.log(datum.req)
-        promises.push(postDataHelper(datum.url, datum.req))
+        promises.push(axios.post(datum.url, datum.req))
     })
     console.log(`promises`)
     console.log(promises)
@@ -114,6 +111,8 @@ function postDataHelper(request, url){
 
     
 }
+
+async function 
 
 app.listen(port, () => {
   console.log(`orchestator app listening at http://localhost:${port}`)
