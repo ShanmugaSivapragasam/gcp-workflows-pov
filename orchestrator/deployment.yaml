@@ -2,24 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: orcehstrator
+  name: orchestrator
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: orcehstrator
+      app: orchestrator
   template:
     metadata:
       labels:
-        app: orcehstrator
+        app: orchestrator
     spec:
       containers:
-      - name: orcehstrator-app
+      - name: orchestrator-app
         # Replace workflows-demo-314019 with your project ID
-        # gcloud builds submit --tag gcr.io/workflows-demo-314019/orcehstrator .
-        # gcloud container clusters create workflow-demo --num-nodes 2 --zone us-east1-b
-        # image: gcr.io/workflows-demo-314019/orcehstrator:latest
-        image: gcr.io/workflows-demo-314019/orcehstrator:orcehstrator@sha256:2a55a4735aca547b599fbaad1673a879f6fa3c37cbc71801c4eac3cd1405dafc        
+        # gcloud builds submit --tag gcr.io/workflows-demo-314019/orchestrator .
+        image: gcr.io/workflows-demo-314019/orchestrator:latest
+        # image: gcr.io/workflows-demo-314019/orchestrator:orchestrator@sha256:2a55a4735aca547b599fbaad1673a879f6fa3c37cbc71801c4eac3cd1405dafc        
         #34.117.20.217/* docker pull gcr.io/workflows-demo-314019/
         # This app listens on port 8080 for web traffic by default.
         ports:

@@ -1,0 +1,15 @@
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "orchestrator-service"
+  namespace: "default"
+spec:
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 8080
+  selector:
+    app: "orchestrator"
+  type: "LoadBalancer"
+  loadBalancerIP: ""

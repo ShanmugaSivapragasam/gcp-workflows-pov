@@ -1,11 +1,12 @@
-const express = require('express')
 require('@google-cloud/trace-agent').start();
+const express = require('express')
 const app = express()
+app.use(express.json())
 const port = 8080
 
 app.use(express.json())
 app.get('/', (req, res) => {
-  console.log('Default Endpoint - Please use validate endpoint')
+  console.log('Default Endpoint and used by ingress - Please use validate endpoint')
   res.status(200).json({"status":"I am a tea pot"})
 })
 

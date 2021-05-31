@@ -2,9 +2,12 @@
 apiVersion: "extensions/v1beta1"
 kind: "Ingress"
 metadata:
-  name: ""
+  name: "orders-ingress"
   namespace: "default"
 spec:
+  backend:
+    serviceName: "validator-service"
+    servicePort: 80
   rules:
   - http:
       paths:
@@ -23,8 +26,4 @@ spec:
       - path: "/payment"
         backend:
           serviceName: "payment-service"
-          servicePort: 80
-      - path: "/validator"
-        backend:
-          serviceName: "validator-service"
           servicePort: 80

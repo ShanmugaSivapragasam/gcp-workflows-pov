@@ -1,5 +1,7 @@
+require('@google-cloud/trace-agent').start();
 const express = require('express')
 const app = express()
+app.use(express.json())
 const port = 8080
 
 app.get('/', (req, res) => {
@@ -14,7 +16,7 @@ app.get('/discounts', (req, res) => {
                 'status':200,
                 'value': 0.05 
             })
-        }, 300
+        }, 100
     )
 })
 app.listen(port, () => {
