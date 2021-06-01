@@ -1,0 +1,62 @@
+main : 
+    params: [order]
+    steps: 
+    - endPoints:
+        assign:
+            - host : "http://34.117.20.217/"
+            - validationUrl: ${host + "common/validation" }
+            - discountsUrl: ${host + "discounts" }
+            - paymentUrl: ${host + "payment" }
+            - loyaltyUrl: ${host + "loyalty" }
+            - marketingUrl: ${host + "marketing" }
+    - assignVars: 
+        assign:
+            - paymentRes: []
+    - valdiator:
+        call: http.post
+        args:
+            url: ${validationUrl}
+            body:
+                input: ${order}
+        result: validatorRes
+        next: validatorSwitch
+    - validatorSwitch:
+        switch:
+            - condition: ${validatorRes.body.valid == true}
+              next: paymentSwitch
+            - condition: ${validatorRes.body.valid == false}
+              next: returnValidatorFail
+    - paymentSwitch:
+        switch:
+            - condition: ${order.discountCode == NULL}
+              next: paymentLoop
+        next: discounts
+    - discounts:
+        call: http.get
+        args:
+            url: ${discountsUrl}
+        result: discount
+        next: paymentLoop
+    - paymentLoop:
+        try:
+            call: http.post
+            args: 
+                url: ${paymentUrl}
+                body: 
+                    input : ${order.payments[0]}
+            result: payment
+        except:
+            as: e
+            steps:
+                - knownErrors:
+                    switch:
+                        - condition: ${not("HttpError" in e.tags)}
+                          return: ${payment}
+                - unhandledErrors:
+                    raise: ${e}
+    - print:
+        call: sys.log
+        args:
+            text: ${validatorRes.body}
+    - returnValidatorFail:
+        return: ${validatorRes.body}
